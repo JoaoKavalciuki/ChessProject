@@ -41,7 +41,7 @@ public class UI {
 
                 System.out.print(ANSI_WHITE + piece + ANSI_RESET);
             } else {
-                System.out.println(ANSI_PURPLE + piece + ANSI_RESET);
+                System.out.print(ANSI_PURPLE + piece + ANSI_RESET);
             }
         }
         System.out.print(" ");
