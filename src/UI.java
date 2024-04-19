@@ -31,7 +31,7 @@ public class UI {
 
             String input = sc.nextLine();
             char column = input.charAt(0);
-            int row = input.charAt(0);
+            int row = Integer.parseInt(input.substring(1));
 
             return new ChessPosition(column, row);
         } catch (RuntimeException exception){
