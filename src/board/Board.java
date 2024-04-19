@@ -50,7 +50,7 @@ public class Board {
         piece.position = position;
     }
 
-    public Piece removePiece(Position position, ChessPiece piece){
+    public Piece removePiece(Position position){
         if(!positionExists(position)){
             throw new BoardException("Position non existent");
         }
