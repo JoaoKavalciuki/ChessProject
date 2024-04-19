@@ -1,6 +1,7 @@
 package chess;
 
 import board.Board;
+import board.Piece;
 import board.Position;
 import chess.enums.Color;
 import chess.pieces.*;
@@ -24,6 +25,31 @@ public class ChessMatch {
 
         return matchPieces;
     }
+
+    public ChessPiece performNewMove(ChessPosition sourcePosition, ChessPosition targetPosition){
+        Position source = sourcePosition.toPosition();
+        Position target = targetPosition.toPosition();
+        validateSourcePosition(source);
+
+        Piece capturedPiece = makeMove(source, target);
+
+        return (ChessPiece) capturedPiece;
+    }
+
+    private Piece makeMove(Position sourcePosition, Position targetPosition){
+        Piece movedPiece = board.removePiece(sourcePosition);
+        Piece capturedPiece = board.removePiece(targetPosition);
+
+        board.placePiece(movedPiece, targetPosition);
+        return movedPiece;
+    }
+
+    private void validateSourcePosition(Position position) {
+        if(!board.thereIsAPiece(position)){
+            throw new ChessException("There is no piece at source position");
+        }
+    }
+
 
     private void placeNewPiece(char column, int row, ChessPiece piece){
         this.board.placePiece(piece, new ChessPosition(column, row).toPosition());
