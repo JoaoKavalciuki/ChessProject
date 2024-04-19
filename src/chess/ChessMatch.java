@@ -48,6 +48,10 @@ public class ChessMatch {
         if(!board.thereIsAPiece(position)){
             throw new ChessException("There is no piece at source position");
         }
+
+        if(!board.getPiece(position).isThereAnyPossibleMove()){
+            throw new ChessException("There is no possibles movies for this piece");
+        }
     }
 
 
