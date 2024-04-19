@@ -1,5 +1,7 @@
 package board;
 
+import chess.ChessPiece;
+
 public class Board {
     int rows;
     int columns;
@@ -46,6 +48,21 @@ public class Board {
 
         pieces[position.getRow()][position.getColumn()] = piece;
         piece.position = position;
+    }
+
+    public Piece removePiece(Position position, ChessPiece piece){
+        if(!positionExists(position)){
+            throw new BoardException("Position non existent");
+        }
+
+        if(!thereIsAPiece(position)){
+            return null;
+        }
+
+        Piece aux = getPiece(position);
+        aux.position = null;
+        pieces[position.getRow()][position.getColumn()] = null;
+        return aux;
     }
 
     private boolean positionExists(int row, int column){
