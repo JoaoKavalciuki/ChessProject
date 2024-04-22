@@ -50,11 +50,17 @@ public class UI {
         System.out.print("Turn: " + match.getTurn());
         System.out.println();
 
-        System.out.println("Waiting player: " + match.getCurrentPlayer());
+        if(!match.isInCheckMate()){
+            System.out.println("Waiting player: " + match.getCurrentPlayer());
 
-        if(match.isInCheck()){
-            System.out.println("YOU ARE IN CHECK");
+            if(match.isInCheck()){
+                System.out.println("YOU ARE IN CHECK");
+            }
+        } else {
+            System.out.println("CHECKMATE");
+            System.out.println("Winner: " + match.getCurrentPlayer());
         }
+
     }
 
     public static void printBoard(ChessPiece[][] pieces){

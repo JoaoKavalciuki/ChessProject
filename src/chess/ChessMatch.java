@@ -227,19 +227,21 @@ public class ChessMatch {
         if(!checkTest(color)){
             return false;
         }
-        List<Piece> pieces = boardPieces.stream().filter(piece -> ((ChessPiece)piece).getColor() == opponent(color)).toList();
+        List<Piece> pieces = boardPieces.stream().filter(piece -> ((ChessPiece)piece).getColor() == color).toList();
         for(Piece piece : pieces){
             boolean[][] possibleMovies = piece.possibleMoves();
             for(int i = 0; i<board.getRows(); i++){
                 for(int j = 0; j< board.getColumns(); j++){
-                    Position source = ((ChessPiece)piece).getChessPosition().toPosition();
-                    Position target = new Position(i, j);
-                    Piece capturedPiece = makeMove(source, target);
-                    boolean testCheck = checkTest(color);
-                    undoMove(source, target, (ChessPiece) capturedPiece);
+                    if(possibleMovies[i][j]){
+                        Position source = ((ChessPiece)piece).getChessPosition().toPosition();
+                        Position target = new Position(i, j);
+                        Piece capturedPiece = makeMove(source, target);
+                        boolean testCheck = checkTest(color);
+                        undoMove(source, target, (ChessPiece) capturedPiece);
 
-                    if(!testCheck){
-                        return false;
+                        if(!testCheck){
+                            return false;
+                        }
                     }
                 }
             }
