@@ -97,7 +97,7 @@ public class ChessMatch {
     }
 
     private void initialSetup(){
-        board.placePiece(new Rook(this.board, Color.BLACK), new Position(0,0));
+        /*board.placePiece(new Rook(this.board, Color.BLACK), new Position(0,0));
         board.placePiece(new Knight(this.board, Color.BLACK), new Position(0,1));
         board.placePiece(new Bishop(this.board, Color.BLACK), new Position(0,2));
         board.placePiece(new King(this.board, Color.BLACK), new Position(0,3));
@@ -131,7 +131,12 @@ public class ChessMatch {
         board.placePiece(new Pawn(this.board, Color.WHITE), new Position(6,5));
         board.placePiece(new Pawn(this.board, Color.WHITE), new Position(6,6));
         board.placePiece(new Pawn(this.board, Color.WHITE), new Position(6,7));
+        */
 
+        board.placePiece(new Rook(this.board, Color.BLACK), new Position(0,0));
+        board.placePiece(new Rook(this.board, Color.WHITE), new Position(7,0));
+        board.placePiece(new King(this.board, Color.WHITE), new Position(7,3));
+        board.placePiece(new King(this.board, Color.BLACK), new Position(0,3));
     }
 
     private void nextTurn(){
