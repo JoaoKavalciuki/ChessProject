@@ -72,10 +72,10 @@ public class ChessMatch {
         board.placePiece(movedPiece, targetPosition);
 
         if(capturedPiece != null){
-            boardPieces.remove(( )capturedPiece);
-            capturedPieces.add((ChessPiece) capturedPiece);
+            boardPieces.remove(capturedPiece);
+            capturedPieces.add(capturedPiece);
         }
-        return movedPiece;
+        return capturedPiece;
     }
 
     private void validateSourcePosition(Position position) {
