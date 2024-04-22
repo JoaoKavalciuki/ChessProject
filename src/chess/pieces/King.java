@@ -29,48 +29,48 @@ public class King extends ChessPiece {
 
         //acima
         auxPosition.setValues(position.getRow()-1, position.getColumn());
-        if(getBoard().positionExists(auxPosition) && canMove(position)){
+        if(getBoard().positionExists(auxPosition) && canMove(auxPosition)){
             auxMatrix[auxPosition.getRow()][auxPosition.getColumn()] = true;
         }
 
         //direita
         auxPosition.setValues(position.getRow(), position.getColumn()+1);
-        if(getBoard().positionExists(auxPosition) && canMove(position)){
+        if(getBoard().positionExists(auxPosition) && canMove(auxPosition)){
             auxMatrix[auxPosition.getRow()][auxPosition.getColumn()] = true;
         }
 
         //abaixo
         auxPosition.setValues(position.getRow()+1, position.getColumn());
-        if(getBoard().positionExists(auxPosition) && canMove(position)){
+        if(getBoard().positionExists(auxPosition) && canMove(auxPosition)){
             auxMatrix[auxPosition.getRow()][auxPosition.getColumn()] = true;
         }
         //esquerda
         auxPosition.setValues(position.getRow(), position.getColumn()-1);
-        if(getBoard().positionExists(auxPosition) && canMove(position)){
+        if(getBoard().positionExists(auxPosition) && canMove(auxPosition)){
             auxMatrix[auxPosition.getRow()][auxPosition.getColumn()] = true;
         }
 
         //diagonal esquerda cima
         auxPosition.setValues(position.getRow()-1, position.getColumn()-1);
-        if(getBoard().positionExists(auxPosition) && canMove(position)){
+        if(getBoard().positionExists(auxPosition) && canMove(auxPosition)){
             auxMatrix[auxPosition.getRow()][auxPosition.getColumn()] = true;
         }
 
         //diagona direita cima
 
         auxPosition.setValues(position.getRow()-1, position.getColumn()+1);
-        if(getBoard().positionExists(auxPosition) && canMove(position)){
+        if(getBoard().positionExists(auxPosition) && canMove(auxPosition)){
             auxMatrix[auxPosition.getRow()][auxPosition.getColumn()] = true;
         }
 
         //diagonal esquerda baixo
         auxPosition.setValues(position.getRow()+1, position.getColumn()-1);
-        if(getBoard().positionExists(auxPosition) && canMove(position)){
+        if(getBoard().positionExists(auxPosition) && canMove(auxPosition)){
             auxMatrix[auxPosition.getRow()][auxPosition.getColumn()] = true;
         }
 
         auxPosition.setValues(position.getRow()+1, position.getColumn()+1);
-        if(getBoard().positionExists(auxPosition) && canMove(position)){
+        if(getBoard().positionExists(auxPosition) && canMove(auxPosition)){
             auxMatrix[auxPosition.getRow()][auxPosition.getColumn()] = true;
         }
 
