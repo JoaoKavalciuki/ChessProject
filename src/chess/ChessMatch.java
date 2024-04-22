@@ -6,12 +6,16 @@ import board.Position;
 import chess.enums.Color;
 import chess.pieces.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ChessMatch {
     private int turn;
-
     private Color currentPlayer;
-
     private Board board;
+
+    private List<Piece> boardPieces = new ArrayList<>();
+    private List<Piece> capturedPieces = new ArrayList<>();
 
     public ChessMatch(){
         board = new Board(8, 8);
@@ -65,9 +69,13 @@ public class ChessMatch {
     private Piece makeMove(Position sourcePosition, Position targetPosition){
         Piece movedPiece = board.removePiece(sourcePosition);
         Piece capturedPiece = board.removePiece(targetPosition);
-
         board.placePiece(movedPiece, targetPosition);
-        return movedPiece;
+
+        if(capturedPiece != null){
+            boardPieces.remove(capturedPiece);
+            capturedPieces.add(capturedPiece);
+        }
+        return capturedPiece;
     }
 
     private void validateSourcePosition(Position position) {
@@ -94,6 +102,7 @@ public class ChessMatch {
 
     private void placeNewPiece(char column, int row, ChessPiece piece){
         this.board.placePiece(piece, new ChessPosition(column, row).toPosition());
+        this.boardPieces.add(piece);
     }
 
     private void initialSetup(){
