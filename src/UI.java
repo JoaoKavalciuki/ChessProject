@@ -44,7 +44,7 @@ public class UI {
         printBoard(match.getPieces());
         System.out.println();
 
-        System.out.print("Turn: " + match.getTurn()+1);
+        System.out.print("Turn: " + match.getTurn());
         System.out.println();
 
         System.out.println("Waiting player: " + match.getCurrentPlayer());
