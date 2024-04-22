@@ -93,7 +93,7 @@ public class ChessMatch {
     }
 
     private void undoMove(Position source, Position target, ChessPiece capturedPiece){
-        Piece movedPiece = board.getPiece(target);
+        Piece movedPiece = board.removePiece(target);
         board.placePiece(movedPiece, source);
 
         if(capturedPiece != null){
