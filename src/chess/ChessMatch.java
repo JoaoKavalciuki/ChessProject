@@ -16,6 +16,8 @@ public class ChessMatch {
     public ChessMatch(){
         board = new Board(8, 8);
         initialSetup();
+        this.turn = 1;
+        this.currentPlayer = Color.WHITE;
     }
 
     public ChessPiece[][] getPieces(){
@@ -134,7 +136,6 @@ public class ChessMatch {
 
     private void nextTurn(){
         turn++;
-
         currentPlayer = (currentPlayer == Color.WHITE) ? Color.BLACK : Color.WHITE;
 
     }
