@@ -81,6 +81,5 @@ public class Pawn extends ChessPiece {
         }
 
         return  auxMatrix;
->>>>>>> chess/chess-piece
     }
 }
