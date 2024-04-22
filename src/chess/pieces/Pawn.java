@@ -31,14 +31,9 @@ public class Pawn extends ChessPiece {
             auxPosition.setValues(position.getRow()-2, position.getColumn());
             Position targetPostion = new Position(position.getRow()-1, position.getColumn());
 
-            if(!getBoard().positionExists(targetPostion) || getBoard().thereIsAPiece(targetPostion)){
-                throw new ChessException("There is alredy a piece at target position or it does not exists");
-            }
-
-            if(getBoard().positionExists(auxPosition) && !getBoard().thereIsAPiece(auxPosition) && this.getMoveCount() == 0){
+            if (getBoard().positionExists(auxPosition) && !getBoard().thereIsAPiece(targetPostion) && getBoard().positionExists(targetPostion) && !getBoard().thereIsAPiece(targetPostion) && getMoveCount() == 0) {
                 auxMatrix[auxPosition.getRow()][auxPosition.getColumn()] = true;
             }
-
 
             //diagonal esquerda
             auxPosition.setValues(position.getRow()-1, position.getColumn()-1);
@@ -59,12 +54,7 @@ public class Pawn extends ChessPiece {
 
             auxPosition.setValues(position.getRow()+2, position.getColumn());
             Position targetPostion = new Position(position.getRow()+1, position.getColumn());
-
-            if(!getBoard().positionExists(targetPostion) || getBoard().thereIsAPiece(targetPostion)){
-                throw new ChessException("There is alredy a piece at target position or it does not exists");
-            }
-
-            if(getBoard().positionExists(auxPosition) && !getBoard().thereIsAPiece(auxPosition) && this.getMoveCount() == 0){
+            if (getBoard().positionExists(auxPosition) && !getBoard().thereIsAPiece(targetPostion) && getBoard().positionExists(targetPostion) && !getBoard().thereIsAPiece(targetPostion) && getMoveCount() == 0) {
                 auxMatrix[auxPosition.getRow()][auxPosition.getColumn()] = true;
             }
 
