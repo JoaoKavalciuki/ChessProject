@@ -105,10 +105,11 @@ public class UI {
         System.out.println("Captured pieces: ");
         System.out.print(ANSI_WHITE);
         System.out.println("White: " + whitePieces);
-        System.out.println(ANSI_RESET);
+        System.out.print(ANSI_RESET);
 
         System.out.print(ANSI_PURPLE);
         System.out.print("Black: " + blackPieces);
-        System.out.println(ANSI_RESET);
+        System.out.print(ANSI_RESET);
+        System.out.println();
     }
 }
