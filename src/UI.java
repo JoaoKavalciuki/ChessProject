@@ -1,8 +1,10 @@
+import chess.ChessMatch;
 import chess.ChessPiece;
 import chess.ChessPosition;
 import chess.enums.Color;
 
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
 public class UI {
@@ -37,6 +39,28 @@ public class UI {
         } catch (RuntimeException exception){
             throw new InputMismatchException("Error reading ChessPosition. Valid values are a1 until h8");
         }
+    }
+
+    public static  void  printMatch(ChessMatch match, List<ChessPiece> capturedPieces){
+        printBoard(match.getPieces());
+        System.out.println();
+        printCapturedPieces(capturedPieces);
+
+        System.out.println();
+        System.out.print("Turn: " + match.getTurn());
+        System.out.println();
+
+        if(!match.isInCheckMate()){
+            System.out.println("Waiting player: " + match.getCurrentPlayer());
+
+            if(match.isInCheck()){
+                System.out.println("YOU ARE IN CHECK");
+            }
+        } else {
+            System.out.println("CHECKMATE");
+            System.out.println("Winner: " + match.getCurrentPlayer());
+        }
+
     }
 
     public static void printBoard(ChessPiece[][] pieces){
@@ -82,5 +106,20 @@ public class UI {
     public static void clearScreen(){
         System.out.print("\033[H\033[2J");
         System.out.flush();
+    }
+
+    private static void printCapturedPieces(List<ChessPiece> capturedPieces){
+        List<ChessPiece> whitePieces = capturedPieces.stream().filter(piece -> piece.getColor() == Color.WHITE).toList();
+        List<ChessPiece> blackPieces = capturedPieces.stream().filter(piece -> piece.getColor() == Color.BLACK).toList();
+
+        System.out.println("Captured pieces: ");
+        System.out.print(ANSI_WHITE);
+        System.out.println("White: " + whitePieces);
+        System.out.print(ANSI_RESET);
+
+        System.out.print(ANSI_PURPLE);
+        System.out.print("Black: " + blackPieces);
+        System.out.print(ANSI_RESET);
+        System.out.println();
     }
 }
