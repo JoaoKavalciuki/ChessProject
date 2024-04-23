@@ -2,12 +2,16 @@ package chess.pieces;
 
 import board.Board;
 import board.Position;
+import chess.ChessMatch;
 import chess.ChessPiece;
 import chess.enums.Color;
 
 public class King extends ChessPiece {
-    public King(Board board, Color color) {
+
+    private ChessMatch match;
+    public King(Board board, Color color, ChessMatch match) {
         super(board, color);
+        this.match = match;
     }
 
     @Override
@@ -18,6 +22,17 @@ public class King extends ChessPiece {
     private boolean canMove(Position position){
         ChessPiece pieceAtPosition = (ChessPiece) getBoard().getPiece(position);
         return (pieceAtPosition == null || pieceAtPosition.getColor() != this.getColor());
+    }
+
+    //jogada roque entre rei e torre
+    private boolean testRookCastling(Position position){
+        ChessPiece piece = (ChessPiece) getBoard().getPiece(position);
+
+        if(piece instanceof Knight && piece.getMoveCount() == 0 && piece.getColor() == this.getColor()){
+            return true;
+        }
+
+        return false;
     }
 
     @Override
@@ -72,6 +87,34 @@ public class King extends ChessPiece {
         auxPosition.setValues(position.getRow()+1, position.getColumn()+1);
         if(getBoard().positionExists(auxPosition) && canMove(auxPosition)){
             auxMatrix[auxPosition.getRow()][auxPosition.getColumn()] = true;
+        }
+
+        //Roque
+
+        if(getMoveCount() == 0 && !this.match.isInCheck()){
+            //right
+            Position rightTowerPosition = new Position(position.getRow(), position.getColumn()+3);
+            if(testRookCastling(rightTowerPosition)){
+                Position p1 = new Position(position.getRow(), position.getColumn()+1);
+                Position p2 = new Position(position.getRow(), position.getColumn()+2);
+
+                if(!getBoard().thereIsAPiece(p1) && !getBoard().thereIsAPiece(p2)){
+                    auxMatrix[position.getRow()][position.getColumn()+2] = true;
+                }
+            }
+
+            //left
+            Position leftTowerPosition = new Position(position.getRow(), position.getColumn()-4);
+
+            if(testRookCastling(leftTowerPosition)){
+                Position p1 = new Position(position.getRow(), position.getColumn()-1);
+                Position p2 = new Position(position.getRow(), position.getColumn()-2);
+                Position p3 = new Position(position.getRow(), position.getColumn()-3);
+
+                if(!getBoard().thereIsAPiece(p1) && !getBoard().thereIsAPiece(p2) && !getBoard().thereIsAPiece(p3)){
+                    auxMatrix[position.getRow()][position.getColumn()-2] = true;
+                }
+            }
         }
 
         return auxMatrix;
