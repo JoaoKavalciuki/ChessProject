@@ -13,9 +13,9 @@ public class ChessMatch {
     private int turn;
     private Color currentPlayer;
     private Board board;
-
     private boolean isInCheck;
     private boolean isInCheckMate;
+    private ChessPiece enPassantVulnerable;
 
     private List<Piece> boardPieces = new ArrayList<>();
     private List<Piece> capturedPieces = new ArrayList<>();
@@ -56,6 +56,10 @@ public class ChessMatch {
         return currentPlayer;
     }
 
+    public ChessPiece getEnPassantVulnerable() {
+        return enPassantVulnerable;
+    }
+
     public ChessPiece performNewMove(ChessPosition sourcePosition, ChessPosition targetPosition){
         Position source = sourcePosition.toPosition();
         Position target = targetPosition.toPosition();
@@ -69,6 +73,10 @@ public class ChessMatch {
             throw new ChessException("You cant put yourself in check");
         }
 
+        ChessPiece movedPiece = (ChessPiece) board.getPiece(target);
+
+
+
         if(checkTest(opponent(currentPlayer))){
             isInCheck = true;
         }
@@ -80,6 +88,12 @@ public class ChessMatch {
             nextTurn();
         }
 
+        //En passant
+
+        if(movedPiece instanceof Pawn && (target.getRow() == sourcePosition.getRow()-2 || target.getRow() == sourcePosition.getRow()+2)){
+            enPassantVulnerable = movedPiece;
+        }
+        enPassantVulnerable = null;
 
         return (ChessPiece) capturedPiece;
     }
